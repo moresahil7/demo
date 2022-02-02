@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./styles.css";
 import { Link } from "react-router-dom";
 const Signup = () => {
@@ -18,12 +18,7 @@ const Signup = () => {
 
   const { first_name, last_name, email, password } = data;
 
-  useEffect(() => {
-    console.log(error);
-    if(Object.keys(error).length === 0 && isSubmit){
-      console.log("h")
-    }
-  }, [error]);
+ 
 
   const validate = (values) => {
     const errors = {};
