@@ -5,11 +5,16 @@ import Signup from './components/Signup';
 import Signin from './components/Signin';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {Provider} from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import store from './app/store'
+
+
+
 
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
   <BrowserRouter>
   <Routes>
     
@@ -17,7 +22,7 @@ ReactDOM.render(
     <Route path="/login" element={<Signin />} />
   </Routes>
 </BrowserRouter>
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 

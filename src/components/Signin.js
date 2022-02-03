@@ -1,7 +1,16 @@
 import React,{useState} from 'react';
 import Axios from "axios";
+import { useDispatch } from 'react-redux';
+import { login, selectUser ,logout} from '../features/userSlice';
+import { useSelector } from 'react-redux';
 
 const Signin = () => {
+
+
+
+
+  const user  = useSelector(selectUser);
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -15,8 +24,17 @@ const Signin = () => {
     });
   };
 
+  const dispatch = useDispatch();
+
   const onSubmit =  (e) => {
     e.preventDefault();
+
+
+    dispatch(login({
+      email: email,
+      password: password,
+      loggedIn:true
+    }))
 
 
 
@@ -30,13 +48,21 @@ const Signin = () => {
       .catch((err) =>console.log(err));
   };
 
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+  }
+
   return (
     <div className="signup_form container">
-    <div className="alert"
-    style={{display: success ? "" : "none"}}
-    >
-    <h1>Hi you are logged in!</h1>
-    </div>
+
+    {
+      user ? <h1>Logged in successfully!</h1> : <div>Login now</div>
+    }
+
+
+   
     <form action="" onSubmit={onSubmit}>
       
       <div className='mb-3'>
@@ -63,6 +89,8 @@ const Signin = () => {
       <input type="submit" className="btn btn-primary" value="Submit" />
       </div>
     </form>
+
+    <button onClick={(e) => handleLogout(e)} className="btn btn-succcess">Logout</button>
   </div>
   )
 };
